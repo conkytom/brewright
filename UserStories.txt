@@ -1,0 +1,197 @@
+Write user stories for a beer recipe formulation app.  
+-Each user story has a difficulty rating and likely a comment.
+-Below the user stories there is more info that should help outline the
+creation of object types and explain some terms that non-brewers probably
+don't know.
+
+OVERALL:  general necessities and interactive parameters
+    1: As a user, I want to be able to add an amount of an ingredient 
+        to a recipe so I can predict the ourcome of a brew.
+        Rating: 3, outline of this will apply to other more specific ingredients.
+        I imagine the initial creation and how it's visually represented will
+        take a while
+        -create ingredient class of objects, each needs a name, amount, and type
+        -integrate them into the UI 
+
+    2: As a user I want to select a batch size for my brew so I can create
+        smaller or larger brews accurately.
+        Rating: 2, this is a parameter I'll need to use to create accurate data
+        anyway so I might as well allow the user to change it.
+        -create batch size and test on initial formula
+        -allow batch size to change and change the outcome of results(ingredients stay the same)
+        -allow batch size to change and scale the ingredients to the outcome stays the same
+        -allow user to create brewhouse/equipment profiles to greater customize more accureatly calculate the recipe
+
+    3: As a user, I want to be able to save my recipe so I can refer to/edit
+        it later.
+        Rating: 3, not much experience saving files, might take awhile.
+        -allow user to save recipe
+        -allow user to load recipe, so it can be eddited and saved again
+
+    4: As a user, I want to to be able to compare my brew to beer styles so 
+        I can see how accurate my brew is to the style.
+        Rating: 3-4, I'll very likely skip this one but probably talk about 
+        options for gathering the data to impliment this.
+        -Create database of beer styles
+        -get a chosen beer style to represented in the UI as a layer underneath the user's recipe
+        -compare the user's recipe to the style and indicate that it is within style (possibly offer traditional ingredients for style too)
+
+    5: As a user, I want to select what type of brew I am making so I can 
+        accurately see how it will affect my brew.
+        Rating: 2-3, possibly skip this one too, would be useful in the long
+        run, but really not necessary for the basic setup, more info on brew
+        types below.
+        -create a formula/profile for an all grain batch
+        -create a formula/profile for an extract batch
+        -create a formula/profile for an partial/hybrid batch
+
+    6: As a user, I want to be able to adjust my brehouse efficiency values
+        so that I can have greater control and more accurately reflect my 
+        system's efficiency.
+        Rating: 2, much like batch size this is a value I'll use for calculations
+        so I may as well make it variable for he user to adjust.  Might skip
+        this for simplicity.
+        -allow user to adjust brewhouse variables
+        -allow user to save edited variables
+
+MASH: the step of mixing hot water with malt to make sugar
+    7: As a user, I want to add malts to a recipe so I can see the predicted 
+        sugar extract of the resulting brew.
+        Rating: 2, each kind of malt has an ideal potential amount of sugar
+        that can be extracted from it, and this will effect the Original
+        gravity.
+
+    8: As a user, I want to add malts to a recipe so I can see the predicted
+        color of the resulting brew.
+        Rating: 1(once the overall malt objects are established), each kind of malt has an amount of color it will contribute
+        to the brew, measured in SRM. Would love to be able to not just give
+        the SRM number but have a block displaying what the actual color may 
+        look like, or possibly a bar with the color spectrum and a mark 
+        indicating this brews color.
+
+    9: As a user, I want to adjust the mash properties of a recipe so I can see
+        how it may affect the sugar extract of the resulting brew.
+        Rating: 2-3, might skip this one, have to look into the formulas for it
+        and see how feasible it is to accuately represent in this app.
+
+
+     : possibly add strike temp/volume, and sparge calculators
+     : possibly add pH balancing salt/additive calculator
+
+BOIL:
+    10: As a user, I want to add hops to a recipe so I can see the predicted    
+        bitterness of the resulting brew.
+        Rating: 2, hops impart bitterness and aroma to beer. Bitterness is 
+        measured in IBU.
+
+    11: As a user, I want to be able to adjust the Alpha Acid of a hop addition
+        so I can make the recipe more accurate with the kind of hops I have.
+        Rating: 1(once the initial hop class is set up), alpha acids are what actually impart the bitterness, and 
+        is used to hone in a recipe's IBUs, different hops have different potential
+        levels of alpha acid, but it varies from batch to batch, so it typiclly says
+        on the bag of hops
+
+    12: As a user, I want to be able to set how long my hops are boiled so I can
+        see accurately how it affects the bitterness.
+        Rating: 2, the longer hops are boiled the more IBUs they will impart to
+        the beer, so adding them at 90 mins left or 5 minutes left is a huge
+        difference. I think the formula is pretty straight forward though.
+
+    13: As a user, I want to add other ingredients to the boil so I have an
+        accurate recipe and know how much I need.
+        Rating: 1, this should be really easy for spices, can be a bit tricky
+        when adding sugars that will add to the original gravity or affect 
+        color.
+        - create an other object that can be added to the boil (name, amount, color?, sugar?, type?)
+        -allow user to create and edit these objects
+
+    14: As a user I want to set my boil time so I can see how the evaporation
+        may affect my brew.
+        Rating: 2, the longer the boil, the more water evaporates, the sugar
+        gets more concentrated, the less the final volume.
+        -allow user to create boil time
+        -hops cannot be boiled for longer than max time
+        -longer boils lead to greater evaporation, this will increase OG,and decrease yeild
+
+FERMENTATION:
+    15: As a user, I want to know how many yeast cells I need for the brew
+        so I can make sure I get enough before making it.
+        Rating: 2,
+        let user ajust the pitch rate, select yeast type, calculate amount
+
+    16: As a user, I want to add a yeast name/type to the recipe so that I can 
+        see how much alcohol it may produce.
+        Rating: 2, yeast strains ferment differently from one another.
+        -create yeast objects with names, attenuation rates, types
+
+    17: As a user, I want to adjust the attenuation of my yeast so I can see
+        its predicted outcome on the final gravity of my brew.
+        Rating: 1, depending on the brewer's set up they may be able to know
+        a more specific number than the given example or range of a given
+        yeast strains attenuation.
+
+    18: As a user, I want to add hops/ingrediets to my fermenter so I have an 
+        accurate recipe.
+        Rating: 1, once the other objects/classes are made it'll be easy to 
+        throw this in.
+
+    : allow user to switch betweem imperial/metric, Specific Gravity/Plato,
+        SRM/Lovibond/EBC
+
+
+
+
+Idea and Glossary section:
+-Time typically refers to the time left in the boil
+-Location will typically refer to where or what step the ingredient it used in like in the boil, or ferment.
+OVERALL:
+    -Ingredient: Each ingredient will need a name and amount associated with it,
+        some will have times and locations to be associated with it.  Some 
+        properties will be predefined and unchangable, some will be predifined
+        and changable, some will not be defined and need to be added during
+        recipe creation.
+    -Batch size: typically 5 gallons, but should be able to make it variable.
+    -Brew type: types of home brews are typically "All Grain" which uses just
+        malt to create sugar for the beer, "Extract" which is much simpler and
+        uses mostly sugar syrups to create the beer, and "Partial Mash"
+        which is a hybrid of the other two.
+    -Brewhouse efficiency: each system will have a different efficiency, which
+        is a measure of how much sugar the brewhouse can extract from the grain
+MASH:
+    -Malt: a main ingredient in beer.  Malt imparts sugars, color, and flavors.
+        Each malt object will need to have a these characteristics: name,
+        potential extract (amount of sugar), color (measured in SRM), amount.
+        Optional: pH, recommended usage rates, location (steep, mash, etc.)
+    -Mash temperature: the temperature can effect the kind of sugars that 
+        are potentially exctracted from the malt, some sugars are more fementable 
+        than others so mash temps can effect the resulting alcohol content. I have
+        an idea of this effect through experience, but I'll have to double check
+        if there's a realiable formula I could use to more accurately/consistenly
+        represent this.
+    -Original Gravity: this is the density of the wort before fermentation.  
+        This is directly related to the amount of sugar that has been 
+        extracted from the malt and added to the water, and is the main 
+        thing we will be calculating from the malt input(s)
+BOIL: 
+    -Hops: a main ingredient in beer. Hops add bitterness and aroma. Each hop   
+        object will need to have these characteristics: name, alpha acid,
+        amount, time, location (boil, secondary, etc.). Optional: 
+        purpose (bitering/aroma/dual), type(pellet, whole, powder, etc.)
+    -Additives, Adjuncts, Spices: optional ingredients in beer, imparting
+        anything like flavor, aroma, color, sugar, etc.  Each extra ingredient 
+        object will need to have these properties: name, amount, type, time, 
+        location. Optional (type dependent): color, potential extract.
+FERMENTATION:
+    -Yeast: a main ingredient in beer. Yeast converts sugar to alcohol and
+        is what turns wort into beer. Each yeast object will need to have 
+        these properties: name, amount, attenuation. Optional: attenuation 
+        range, temp range, alcohol tolerance range, flocculation, Lab/ProductID.
+    -Attenuation: this is how much of the sugar in the beer that the yeast
+        can potentially consume and turn into alcohol
+    -Final Gravity: this is the denisty of the beer after fermentation.
+        Alcohol is less dense than water, so as the yeast attenuates(ferments)
+        the wort into beer it becomes less dense.
+    -Alcohol: What all the work is really for.  Alcohol by Volume (ABV), is
+        measured by taking the difference in original gravity and final gravity
+        and plugging them into a formula.
+    
