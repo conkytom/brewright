@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  primary_time: 1
+  primary_time_unit: MyString
+  primary_temp: 1
+  secondary: false
+  secondary_time: 1
+  secondary_time_unit: MyString
+  secondary_temp: 1
+  volume: 9.99
+  volume_unit: MyString
+  location: MyString
+
+two:
+  primary_time: 1
+  primary_time_unit: MyString
+  primary_temp: 1
+  secondary: false
+  secondary_time: 1
+  secondary_time_unit: MyString
+  secondary_temp: 1
+  volume: 9.99
+  volume_unit: MyString
+  location: MyString

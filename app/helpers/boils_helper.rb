@@ -1,0 +1,2 @@
+module BoilsHelper
+end

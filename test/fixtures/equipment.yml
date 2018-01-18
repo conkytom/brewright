@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  kettle_volume: 9.99
+  kettle_volume_unit: MyString
+  loss: 9.99
+  loss_unit: MyString
+  evaporation_rate: 9.99
+  eavopration_rate_unit: MyString
+  wort_shrinkage: 9.99
+
+two:
+  name: MyString
+  kettle_volume: 9.99
+  kettle_volume_unit: MyString
+  loss: 9.99
+  loss_unit: MyString
+  evaporation_rate: 9.99
+  eavopration_rate_unit: MyString
+  wort_shrinkage: 9.99

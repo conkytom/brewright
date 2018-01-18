@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  style: MyString
+  size: 9.99
+  size_unit: MyString
+  type: 
+  trub_loss: 9.99
+  trub_loss_unit: MyString
+  original_gravity: 9.99
+  final_gravity: 9.99
+  gravity_unit: MyString
+  abv: 9.99
+  abw: 9.99
+  ibu: 1
+  color: 1
+  color_unit: MyString
+  bu_gu_ratio: 9.99
+  bu_gu_description: MyString
+
+two:
+  name: MyString
+  style: MyString
+  size: 9.99
+  size_unit: MyString
+  type: 
+  trub_loss: 9.99
+  trub_loss_unit: MyString
+  original_gravity: 9.99
+  final_gravity: 9.99
+  gravity_unit: MyString
+  abv: 9.99
+  abw: 9.99
+  ibu: 1
+  color: 1
+  color_unit: MyString
+  bu_gu_ratio: 9.99
+  bu_gu_description: MyString
