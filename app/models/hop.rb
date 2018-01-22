@@ -1,5 +1,6 @@
 class Hop < ApplicationRecord
-    has_and_belongs_to_many :boil
-    has_and_belongs_to_many :mash
-    has_and_belongs_to_many :fermentation
+    has_many :recipe_hop
+
+    validates :name, length: {minimum: 1}, presence: true
+    validates :alpha_acid,   numericality: {greater_than: 0}, presence: true
 end

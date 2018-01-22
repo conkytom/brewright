@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  comment: MyText
+  amount: 9.99
+  location: MyString
+  amount_unit: MyString
+  color: 1
+  color_unit: MyString
+  extract: 1
+  usage_rate: 1
+  type: 
+  percent_malt_bill: 9.99
+  maltster: MyString
+  origin: MyString
+
+two:
+  name: MyString
+  comment: MyText
+  amount: 9.99
+  location: MyString
+  amount_unit: MyString
+  color: 1
+  color_unit: MyString
+  extract: 1
+  usage_rate: 1
+  type: 
+  percent_malt_bill: 9.99
+  maltster: MyString
+  origin: MyString
