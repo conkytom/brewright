@@ -39,6 +39,17 @@ gem 'materialize-sass'
 # Minitest: https://github.com/seattlerb/minitest
 gem 'minitest'
 
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+
+gem 'thor', '0.20.0'
+
+group :production do
+  # Use pg as the production database for Active Record
+  gem 'pg'
+  gem 'rails_12factor'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

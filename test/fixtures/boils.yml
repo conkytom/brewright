@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  length: 1
+  length_unit: MyString
+  pre_volume: 9.99
+  post_volume: 9.99
+  volume_unit: MyString
+
+two:
+  length: 1
+  length_unit: MyString
+  pre_volume: 9.99
+  post_volume: 9.99
+  volume_unit: MyString
