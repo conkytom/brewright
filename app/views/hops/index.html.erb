@@ -1,15 +1,52 @@
 <div class="row">
     <div class=""><h2>Hops</h2></div>
-    <div class="modal-trigger"><a class="waves-effect waves-light btn right-align orange darken-3" href="<%= new_hop_path %>">Add Hop Variety</a></div>
+    <button data-target="modal_add_hop" class="btn modal-trigger orange darken-3">Add Hop Variety</button>
 </div>
 
 <ul class="collapsible" data-collapsible="accordion">
-    <li>
-        <div class="collapsible-header">
-        <%= image_tag("icon-hops.png", height: "15")%>First</div>
-        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
+    <% @hops.each do |hop| %>
+        <li>
+            <div class="collapsible-header row">
+                <div class="col s1">
+                    <%= image_tag("icon-hops.png", height: "15")%>
+                </div>
+                <div class="col s4">
+                    <%= hop.name %> 
+                </div>
+                <div class="col s3">
+                    <%= hop.alpha_acid %>% AA
+                </div>
+                <div class="col s2">
+                    <%= hop.type %>
+                </div>
+                <div class="col s1">
+                    <a data-target="modal_edit_hop" class="modal-trigger "><%= image_tag("icon-advanced.png", height: "15")%></a>
+                    <a href="hops/<%= hop.id %>/edit">EDIT</a>
+<div id="modal_edit_hop" class="modal modal_edit_hop">
+    <div class="modal-content">
+        
+    </div>
+</div>                
+                </div>
 
-
-
+            </div>
+            <div class="collapsible-body">
+                <div class="row">
+                    <span>Origin:  <%= hop.origin %></span>
+                </div>
+                <div class="row">
+                    <span>Comment: <%= hop.comment %> </span>
+                 </div>
+            </div>
+        </li>
+    <% end %>
 </ul>
+
+
+
+<div id="modal_add_hop" class="modal modal_add_hop">
+    <div class="modal-content">
+        <%= render :template => "hops/new" %>
+    </div>
+</div>
+

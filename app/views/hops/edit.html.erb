@@ -1,2 +1,2 @@
-<h1>Hops#edit</h1>
-<p>Find me in app/views/hops/edit.html.erb</p>
+<h4>Edit Hop Variety</h4>
+<%= render partial: 'form', locals: { hop: Hop.find(params[:id]) } %>

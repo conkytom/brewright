@@ -1,0 +1,55 @@
+<%= form_for [hop] do |f| %>
+    <% if hop.errors.any? %>
+        <div class="alert alert-danger">
+            <h4><%= pluralize(hop.errors.count, "error") %>.</h4>
+            <ul>
+                <% hop.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <div class="row">
+        <form class="col s12">
+            <small>* required</small>
+            <div class="row">
+                <div class="input-field col s6">
+                    <%= form_group_tag(hop.errors[:name]) do %>
+                        <p>Hop Variety Name*</p>
+                        <%= f.text_field :name, class: 'form-control', placeholder: "Name" %>
+                    <% end %>
+                </div>
+                <div class="col s2 offset-s1">
+                    <p>Hop Type</p>
+                    <%= f.select(:type, hop_types, :prompt => 'Choose...') %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s3">
+                    <%= form_group_tag(hop.errors[:alpha_acid]) do %>
+                        <p>% Alpha Acid*</p> 
+                        <%= f.text_field :alpha_acid, class: 'form-control', placeholder: "AA%" %>
+                    <% end %>
+                </div>
+                <div class="input-field col s6 offset-s3">
+                    <p>Country of Origin</p> 
+                    <%= f.text_field :origin, class: 'form-control', placeholder: "Country" %>   
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <p>Comments</p>
+                    <%= f.text_area :comment, rows: 8, class: 'form-control', placeholder: 'Add a comment or desciption' %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4 offset-s1">
+                    <small>* denotes a required field</small>
+                </div>
+                <div class="col s2 offset-s10">
+                    <%= f.submit "Save", class: 'btn' %>
+            </div>
+        </form>
+    </div>
+<% end %>
