@@ -17,16 +17,16 @@
                     <%= hop.alpha_acid %>% AA
                 </div>
                 <div class="col s2">
-                    <%= hop.type %>
+                    <%= hop.hop_type %>
                 </div>
                 <div class="col s1">
-                    <a data-target="modal_edit_hop" class="modal-trigger "><%= image_tag("icon-advanced.png", height: "15")%></a>
-                    <a href="hops/<%= hop.id %>/edit">EDIT</a>
-<div id="modal_edit_hop" class="modal modal_edit_hop">
-    <div class="modal-content">
-        
-    </div>
-</div>                
+                    <a data-target="modal_edit_hop<%= hop.id %>" class="modal-trigger "><%= image_tag("icon-advanced.png", height: "15", alt: "Edit this hop")%></a>
+                    <div id="modal_edit_hop<%= hop.id %>" class="modal modal_edit_hop<%= hop.id %>">
+                        <div class="modal-content">
+                            <h4>Edit Hop Variety</h4>
+                            <%= render partial: 'form', locals: { hop: hop, id: hop.id } %>
+                        </div>
+                    </div>                
                 </div>
 
             </div>

@@ -11,7 +11,7 @@ class HopsController < ApplicationController
     @hop = Hop.new(hop_params)
     
     if @hop.save
-      redirect_to hops_path, notice: "Hop variety was saved successfully."
+      redirect_to hops_path
     else
       flash.now[:alert] = "Error creating hop. Please try again."
       render :new
@@ -25,6 +25,14 @@ class HopsController < ApplicationController
 
   def destroy
     @hop = Hop.find(params[:id])
+
+    if @hop.destroy
+      flash[:notice] = "#{@hop.name} was deleted."
+      redirect_to hops_path
+    else
+      flash.now[:alert] = "There was an error deleting the post."
+      redirect_to hops_path
+    end
   end
 
   def edit
@@ -37,15 +45,15 @@ class HopsController < ApplicationController
     @hop.assign_attributes(hop_params)
     
     if @hop.save
-      redirect_to hops_path, notice: "Hop variety was updated successfully."
+      redirect_to hops_path
     else
       flash.now[:alert] = "Error saving hop. Please try again."
-      render :new
+      render :edit
     end
   end
 
   private
   def hop_params
-    params.require(:hop).permit(:name, :alpha_acid, :type, :origin, :comment)
+    params.require(:hop).permit(:name, :alpha_acid, :hop_type, :origin, :comment)
   end
 end

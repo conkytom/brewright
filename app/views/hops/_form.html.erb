@@ -15,40 +15,42 @@
             <div class="row">
                 <div class="input-field col s6">
                     <%= form_group_tag(hop.errors[:name]) do %>
-                        <p>Hop Variety Name*</p>
-                        <%= f.text_field :name, class: 'form-control', placeholder: "Name" %>
+                        <label for="name">Hop Variety Name*</label>
+                        <%= f.text_field :name, class: 'form-control' %>
                     <% end %>
                 </div>
-                <div class="col s2 offset-s1">
-                    <p>Hop Type</p>
-                    <%= f.select(:type, hop_types, :prompt => 'Choose...') %>
+                <div class="col s4 offset-s1">
+                    <label for="hop_type">Hop Type</label>
+                    <%= f.select(:hop_type, hop_types) %>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s3">
                     <%= form_group_tag(hop.errors[:alpha_acid]) do %>
-                        <p>% Alpha Acid*</p> 
-                        <%= f.text_field :alpha_acid, class: 'form-control', placeholder: "AA%" %>
+                        <label for="alpha_acid">% Alpha Acid*</label> 
+                        <%= f.text_field :alpha_acid, class: 'form-control' %>
                     <% end %>
                 </div>
                 <div class="input-field col s6 offset-s3">
-                    <p>Country of Origin</p> 
-                    <%= f.text_field :origin, class: 'form-control', placeholder: "Country" %>   
+                    <label for="origin">Country of Origin</label> 
+                    <%= f.text_field :origin, class: 'form-control' %>   
                 </div>
             </div>
-
             <div class="row">
                 <div class="input-field col s12">
-                    <p>Comments</p>
-                    <%= f.text_area :comment, rows: 8, class: 'form-control', placeholder: 'Add a comment or desciption' %>
+                    <label for="comment">Comments</label>
+                    <%= f.text_area :comment, rows: 8, class: 'form-control' %>
                 </div>
             </div>
             <div class="row">
-                <div class="col s4 offset-s1">
-                    <small>* denotes a required field</small>
+                <div class="col s2">
+                    <% if hop.id %>
+                        <%= link_to "DELETE", hop, method: :delete, class: 'btn red darken-4', data: { confirm: 'Are you sure you want to delete this hop variety?'} %>
+                    <% end %>
                 </div>
-                <div class="col s2 offset-s10">
-                    <%= f.submit "Save", class: 'btn' %>
+                <div class="col s2 offset-s7">
+                    <%= f.submit "SAVE", class: 'btn orange darken-3' %>
+                </div>
             </div>
         </form>
     </div>

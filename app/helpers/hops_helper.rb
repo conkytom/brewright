@@ -1,6 +1,6 @@
 module HopsHelper 
     def hop_types
-        [['Aroma', 'aroma'], ['Bittering', 'bitter'], ['Dual Purpose', 'dual']]
+        [['Aroma', 'Aroma'], ['Bittering', 'Bittering'], ['Dual Purpose', 'Dual Purpose']]
     end
 
     def new_hop_modal
