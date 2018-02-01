@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180117221459) do
+ActiveRecord::Schema.define(version: 20180130222620) do
 
   create_table "boils", force: :cascade do |t|
     t.integer "length"
@@ -31,6 +31,24 @@ ActiveRecord::Schema.define(version: 20180117221459) do
     t.decimal "evaporation_rate"
     t.string "eavopration_rate_unit"
     t.decimal "wort_shrinkage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fermentables", force: :cascade do |t|
+    t.string "name"
+    t.text "comment"
+    t.decimal "amount"
+    t.string "location"
+    t.string "amount_unit"
+    t.integer "color"
+    t.string "color_unit"
+    t.integer "extract"
+    t.integer "usage_rate"
+    t.string "ferm_type"
+    t.decimal "percent_malt_bill"
+    t.string "maltster"
+    t.string "origin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -60,25 +78,7 @@ ActiveRecord::Schema.define(version: 20180117221459) do
     t.string "amount_unit"
     t.decimal "alpha_acid"
     t.decimal "ibu"
-    t.string "type"
-    t.string "origin"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "malts", force: :cascade do |t|
-    t.string "name"
-    t.text "comment"
-    t.decimal "amount"
-    t.string "location"
-    t.string "amount_unit"
-    t.integer "color"
-    t.string "color_unit"
-    t.integer "extract"
-    t.integer "usage_rate"
-    t.string "type"
-    t.decimal "percent_malt_bill"
-    t.string "maltster"
+    t.string "hop_type"
     t.string "origin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -111,12 +111,77 @@ ActiveRecord::Schema.define(version: 20180117221459) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "recipe_fermentables", force: :cascade do |t|
+    t.string "name"
+    t.text "comment"
+    t.decimal "amount"
+    t.string "location"
+    t.string "amount_unit"
+    t.integer "color"
+    t.string "color_unit"
+    t.integer "extract"
+    t.integer "usage_rate"
+    t.string "ferm_type"
+    t.decimal "percent_malt_bill"
+    t.string "maltster"
+    t.string "origin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recipe_hops", force: :cascade do |t|
+    t.string "name"
+    t.text "comment"
+    t.decimal "amount"
+    t.integer "time"
+    t.string "time_unit"
+    t.string "location"
+    t.string "amount_unit"
+    t.decimal "alpha_acid"
+    t.decimal "ibu"
+    t.string "hop_type"
+    t.string "origin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recipe_others", force: :cascade do |t|
+    t.string "name"
+    t.text "comment"
+    t.decimal "amount"
+    t.integer "time"
+    t.string "time_unit"
+    t.string "location"
+    t.string "amount_unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recipe_yeasts", force: :cascade do |t|
+    t.string "name"
+    t.text "comment"
+    t.decimal "amount"
+    t.string "amount_unit"
+    t.string "location"
+    t.string "yeast_type"
+    t.string "lab"
+    t.string "product_id"
+    t.string "flocculation"
+    t.integer "tolerance"
+    t.string "temp_range"
+    t.string "attenuation_range"
+    t.integer "attenuation"
+    t.string "form"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "recipes", force: :cascade do |t|
     t.string "name"
     t.string "style"
     t.decimal "size"
     t.string "size_unit"
-    t.string "type"
+    t.string "recipe_type"
     t.decimal "trub_loss"
     t.string "trub_loss_unit"
     t.decimal "original_gravity"
@@ -139,7 +204,7 @@ ActiveRecord::Schema.define(version: 20180117221459) do
     t.decimal "amount"
     t.string "amount_unit"
     t.string "location"
-    t.string "type"
+    t.string "yeast_type"
     t.string "lab"
     t.string "product_id"
     t.string "flocculation"

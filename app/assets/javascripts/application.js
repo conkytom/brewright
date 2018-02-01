@@ -14,4 +14,5 @@
 //= require turbolinks
 //= require jquery
 //= require materialize-sprockets
+//= require modals
 //= require_tree .

@@ -10,34 +10,36 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="col offset-s1">
       <nav>
         <div class="nav-wrapper amber darken-2">
-          <ul class="left hide-on-med-and-down">
-            <li><%= link_to "Home"%></li>
-            <li><%= link_to "New Recipe"%></li>
-            <li><%= link_to "Load Recipe"%></li>
-            <li><%= link_to "Fermentables"%></li>
-            <li><%= link_to "Hops"%></li>
-            <li><%= link_to "Yeast"%></li>
-            <li><%= link_to "Other"%></li>
-            <li><%= link_to "Help"%></li>
+          <ul class="">
+            <li><%= image_tag("logo_white.png", height: "60", alt: "Brewright Logo")%></li>
+            <li><%= link_to "Home", root_path%></li>
+            <li><%= link_to "New Recipe", new_recipe_path%></li>
+            <li><%= link_to "Load Recipe", recipes_path%></li>
+            <li><%= link_to "Fermentables", fermentables_path%></li>
+            <li><%= link_to "Hops", hops_path%></li>
+            <li><%= link_to "Yeast", yeasts_path%></li>
+            <li><%= link_to "Other", others_path%></li>
+            <li><%= link_to "Help", welcome_about_path%></li>
           </ul>
         </div>
       </nav>
       <% if flash[:notice] %>
-          <div class="alert alert-sucess">
-              <button type="button" class="close" data-dismss="alert">&times;</button>
+          <div class="row flow-text green lighten-1">
               <%= flash[:notice] %>
+              <button type="button" class="close grey" data-dismss="notice">X</button>
           </div>
       <% elsif flash[:alert] %>
-          <div class="alert alert-warning">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <div class="row flow-text red lighten-1">
               <%= flash[:alert] %>
+              <button type="button" class="close btn" data-dismiss="alert">X</button>
           </div>
       <% end %>
-
+      
       <%= yield %>
+      
     </div>
   </body>
 </html>

@@ -1,0 +1,2 @@
+module RecipeFermentablesHelper
+end
