@@ -20,29 +20,24 @@
                     <%= hop.hop_type %>
                 </div>
                 <div class="col s1">
-                    <a data-target="modal_edit_hop<%= hop.id %>" class="modal-trigger "><%= image_tag("icon-advanced.png", height: "15", alt: "Edit this hop")%></a>
-                    <div id="modal_edit_hop<%= hop.id %>" class="modal modal_edit_hop<%= hop.id %>">
-                        <div class="modal-content">
-                            <h4>Edit Hop Variety</h4>
-                            <%= render partial: 'form', locals: { hop: hop, id: hop.id } %>
-                        </div>
-                    </div>                
+                    <a data-target="modal_edit_hop<%= hop.id %>" class="modal-trigger "><%= image_tag("icon-advanced.png", height: "15", alt: "Edit this hop")%></a>                
                 </div>
-
+                <div id="modal_edit_hop<%= hop.id %>" class="modal modal_edit_hop<%= hop.id %>">
+                    <div class="modal-content">
+                        <h4>Edit Hop Variety</h4>
+                        <%= render partial: 'form', locals: { hop: hop, id: hop.id } %>
+                    </div>
+                </div>
             </div>
             <div class="collapsible-body">
                 <div class="row">
-                    <span>Origin:  <%= hop.origin %></span>
+                    <span class="col s9">Comment: <%= hop.comment %> </span>
+                    <span class="col s3">Origin:  <%= hop.origin %></span>
                 </div>
-                <div class="row">
-                    <span>Comment: <%= hop.comment %> </span>
-                 </div>
             </div>
         </li>
     <% end %>
 </ul>
-
-
 
 <div id="modal_add_hop" class="modal modal_add_hop">
     <div class="modal-content">

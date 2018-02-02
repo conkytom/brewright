@@ -1,2 +1,58 @@
-<h1>Fermentables#index</h1>
-<p>Find me in app/views/fermentables/index.html.erb</p>
+<div class="row">
+    <div class=""><h2>Fermentables</h2></div>
+    <button data-target="modal_add_fermentable" class="btn modal-trigger orange darken-3">Add Fermentable</button>
+</div>
+
+<ul class="collapsible" data-collapsible="accordion">
+    <% @fermentables.each do |fermentable| %>
+        <li>
+            <div class="collapsible-header row">
+                <div class="col s1">
+                    <% if fermentable.ferm_type == 'Sugar Adjunct' %>
+                        <%= image_tag("icon-sugar.png", height: "15") %>
+                    <% else %>
+                        <%= image_tag("icon-barley.png", height: "15") %>
+                    <% end %>
+                </div>
+                <div class="col s4">
+                    <%= fermentable.name %> 
+                </div>
+                <div class="col s3">
+                    <%= fermentable.color %> ˚L
+                </div>
+                <div class="col s2">
+                    Extract: <%= fermentable.extract %>%
+                </div>
+                <div class="col s1">
+                    <a data-target="modal_edit_fermentable<%= fermentable.id %>" class="modal-trigger "><%= image_tag("icon-advanced.png", height: "15", alt: "Edit this fermentable")%></a>               
+                </div> 
+                <div class="modal" id="modal_edit_fermentable<%= fermentable.id %>">
+                    <div class="modal-content">
+                        <h4>Edit Fermentable</h4>
+                        <%= render partial: 'form', locals: { fermentable: fermentable, id: fermentable.id } %>
+                    </div>
+                </div>
+            </div>
+            <div class="collapsible-body">
+                <div class="row">
+                    <span class="col s4"> Type: <%= fermentable.ferm_type %></span>
+                    <span class="col s5 offset-s2">Suggested Maximum Usage Rate:  <%= fermentable.usage_rate %></span>
+                </div>
+                <div class="row">
+                    <span class="col s4"> Maltster: <%= fermentable.maltster %></span>
+                    <span class="col s5 offset-s2">Origin:  <%= fermentable.origin %></span>
+                </div>
+                <div class="row">
+                    <span class="col s12">Comment: <%= fermentable.comment %> </span>
+                </div>
+            </div>
+        </li>
+    <% end %>
+</ul>
+
+<div id="modal_add_fermentable" class="modal modal_add_fermentable">
+    <div class="modal-content">
+        <%= render :template => "fermentables/new" %>
+    </div>
+</div>
+

@@ -14,7 +14,7 @@ class HopsController < ApplicationController
       redirect_to hops_path
     else
       flash.now[:alert] = "Error creating hop. Please try again."
-      render :new
+      redirect_to hops_path
     end
   end
 
@@ -30,7 +30,7 @@ class HopsController < ApplicationController
       flash[:notice] = "#{@hop.name} was deleted."
       redirect_to hops_path
     else
-      flash.now[:alert] = "There was an error deleting the post."
+      flash.now[:alert] = "There was an error deleting the hop."
       redirect_to hops_path
     end
   end
@@ -48,7 +48,7 @@ class HopsController < ApplicationController
       redirect_to hops_path
     else
       flash.now[:alert] = "Error saving hop. Please try again."
-      render :edit
+      redirect_to hops_path
     end
   end
 
