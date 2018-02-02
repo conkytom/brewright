@@ -14,10 +14,10 @@
                     <%= yeast.name %> 
                 </div>
                 <div class="col s3">
-                    <%= yeast.alpha_acid %>% AA
+                    <%= yeast.yeast_type %>
                 </div>
                 <div class="col s2">
-                    <%= yeast.yeast_type %>
+                    Attenuation: <%= yeast.attenuation %> %
                 </div>
                 <div class="col s1">
                     <a data-target="modal_edit_yeast<%= yeast.id %>" class="modal-trigger "><%= image_tag("icon-advanced.png", height: "15", alt: "Edit this yeast")%></a>                
@@ -31,8 +31,17 @@
             </div>
             <div class="collapsible-body">
                 <div class="row">
-                    <span class="col s9">Comment: <%= yeast.comment %> </span>
-                    <span class="col s3">Origin:  <%= yeast.origin %></span>
+                    <span class="col s3">Flocculation: <%= yeast.flocculation %></span>
+                    <span class="col s3">Tolerance: <%= yeast.tolerance %> %ABV</span>
+                    <span class="col s3">Temp Range: <%= yeast.temp_range %> ˚F</span>
+                </div>
+                <div class="row">
+                    <span class="col s3">Lab: <%= yeast.lab %></span>
+                    <span class="col s3">Product ID: <%= yeast.product_id %></span>
+                    <span class="col s3">Form: <%= yeast.form %></span>
+                </div>
+                <div class="row">
+                    <span class="col s12">Comment: <%= yeast.comment %> </span>
                 </div>
             </div>
         </li>
