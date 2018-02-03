@@ -1,2 +1,47 @@
-<h1>Recipes#index</h1>
-<p>Find me in app/views/recipes/index.html.erb</p>
+<div class="row">
+    <div class=""><h2>Recipes</h2></div>
+    <button class="btn modal-trigger orange darken-3"><%= link_to "New Recipe", new_recipe_path %></button>
+</div>
+
+<ul class="collapsible" data-collapsible="accordion">
+    <% @recipes.each do |recipe| %>
+        <li>
+            <div class="collapsible-header row">
+                <div class="col s1">
+                    <%= image_tag("icon-award.png", height: "15")%>
+                </div>
+                <div class="col s4">
+                    <%= recipe.name %> 
+                </div>
+                <div class="col s2">
+                    <%= recipe.style%>
+                </div>
+                <div class="col s2">
+                    <%= recipe.ibu%> IBU
+                </div>
+                <div class="col s2">
+                    <%= recipe.abv%> %ABV
+                </div>
+                <div class="col s1">
+                    <%= link_to image_tag("icon-advanced.png", height: "15", alt: "Edit this ingredient"), edit_recipe_path %>
+                </div>
+            </div>
+            <div class="collapsible-body">
+                <div class="row">
+                    <div class="col s3">
+                        <%= recipe.color%> ˚L
+                    </div>
+                    <div class="col s3">
+                        OG: <%= recipe.original_gravity %>
+                    </div>
+                    <div class="col s3">
+                        FG: <%= recipe.final_gravity %>
+                    </div>
+                </div>
+                <div class="row">
+                    <span class="col s9">Comment: <%= recipe.comment %> </span>
+                </div>
+            </div>
+        </li>
+    <% end %>
+</ul>
