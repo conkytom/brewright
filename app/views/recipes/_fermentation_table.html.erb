@@ -1,0 +1,74 @@
+<table class="fermentation-forms forms-div">
+    <tr class="brown lighten-3">
+        <td colspan="7"><h5>Fermentation & Yeast</h5></td>
+    </tr>
+    <tr>
+        <td colspan="3">YEAST NAME</td>
+        <td>Lab Name</td>
+        <td colspan="2">##% Attenuation</td>
+        <td><%= image_tag("icon-advanced.png", height: "15", alt: "Edit equipment")%>
+        X</td>
+    </tr>
+    <tr>
+        <td colspan="5"><button data-target="modal_add_recipe_yeast" class="btn modal-trigger brown darken-3">Add yeast</button></td>
+        <td colspan="5" class="right-align"><button data-target="modal_create_recipe_yeast" class="btn modal-trigger brown darken-3">Create Custom</button></td>
+    </tr>
+    <tr>
+        <td colspan="6" class="center-align">At the current fermentation profile this brew will need ### Billion Cells</td>
+        <td><%= image_tag("icon-advanced.png", height: "15", alt: "Edit equipment")%></td>
+    </tr>
+    <tr>
+        <td colspan="3">HOP NAME</td>
+        <td>AMNT OZ^</td>
+        <td>TIME DAYS^</td>
+        <td>LOCATION^</td>
+        <td><%= image_tag("icon-advanced.png", height: "15", alt: "Edit equipment")%>
+        X</td>
+    </tr>
+    <tr>
+        <td colspan="5"><button data-target="modal_add_dryhop" class="btn modal-trigger brown darken-2">Add dryhop</button></td>
+        <td colspan="5" class="right-align"><button data-target="modal_create_dryhop" class="btn modal-trigger brown darken-2">Create Custom</button></td>
+    </tr>
+    <tr>
+        <td colspan="3">HOP NAME</td>
+        <td>AMNT OZ^</td>
+        <td>TIME DAYS^</td>
+        <td>LOCATION^</td>
+        <td><%= image_tag("icon-advanced.png", height: "15", alt: "Edit equipment")%>
+        X</td>
+    </tr>
+    <tr>
+        <td colspan="5"><button data-target="modal_add_other" class="btn modal-trigger brown darken-1">Add other</button></td>
+        <td colspan="5" class="right-align"><button data-target="modal_create_other" class="btn modal-trigger brown darken-1">Create Custom</button></td>
+    </tr>
+</table><!-- FERMENTATION FORMS -->
+<div id="modal_add_recipe_yeast" class="modal">
+    <div class="modal-content">
+        ADD YEAST 
+    </div>
+</div>
+<div id="modal_create_recipe_yeast" class="modal">
+    <div class="modal-content">
+        CREATE YEAST 
+    </div>
+</div>
+<div id="modal_add_dryhop" class="modal">
+    <div class="modal-content">
+        ADD DRYHOP
+    </div>
+</div>
+<div id="modal_create_dryhop" class="modal">
+    <div class="modal-content">
+        CREATE DRYHOP 
+    </div>
+</div>
+<div id="modal_add_other" class="modal">
+    <div class="modal-content">
+        ADD OTHER
+    </div>
+</div>
+<div id="modal_create_other" class="modal">
+    <div class="modal-content">
+        CREATE OTHER 
+    </div>
+</div>

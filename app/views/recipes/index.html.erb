@@ -1,6 +1,7 @@
+
 <div class="row">
-    <div class=""><h2>Recipes</h2></div>
-    <button class="btn modal-trigger orange darken-3"><%= link_to "New Recipe", new_recipe_path %></button>
+    <div class=""><h2>Recipes</h2></div>  
+    <%= link_to "New Recipe", new_recipe_path, class: "btn orange darken-3" %>    
 </div>
 
 <ul class="collapsible" data-collapsible="accordion">
@@ -17,19 +18,20 @@
                     <%= recipe.style%>
                 </div>
                 <div class="col s2">
-                    <%= recipe.ibu%> IBU
+                    <%= recipe.ibu %> IBU
                 </div>
                 <div class="col s2">
-                    <%= recipe.abv%> %ABV
+                    <%= recipe.abv %> %ABV
                 </div>
                 <div class="col s1">
-                    <%= link_to image_tag("icon-advanced.png", height: "15", alt: "Edit this ingredient"), edit_recipe_path %>
+                    <%= link_to image_tag("icon-advanced.png", height: "15", alt: "Edit this ingredient"), edit_recipe_path(recipe.id) %>
+                    <%= link_to "X", recipe, method: :delete %>
                 </div>
             </div>
             <div class="collapsible-body">
                 <div class="row">
                     <div class="col s3">
-                        <%= recipe.color%> ˚L
+                        <%= recipe.color %> ˚L
                     </div>
                     <div class="col s3">
                         OG: <%= recipe.original_gravity %>

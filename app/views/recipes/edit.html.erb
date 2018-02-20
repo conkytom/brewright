@@ -1,2 +1,175 @@
-<h1>Recipes#edit</h1>
-<p>Find me in app/views/recipes/edit.html.erb</p>
+<%= form_for [@recipe] do |f| %>
+<div id="fixed-menu" class="recipe-snapshot amber darken-3">
+    
+    <div id="mash" class="about-brew valign-wrapper amber darken-3 row">
+        <div class="brew-name input-field col s3">
+            <%= f.text_field :name, class: 'form-control' %>
+            <label for="name">Recipe Name</label>
+            
+        </div>
+        <div class="brew-style input-field col s3">
+            <%= f.text_field :style, class: 'form-control' %>
+            <label for="style">Beer Style</label>
+            
+        </div>
+        <div class="brew-type col s3">
+            <%= f.select(:recipe_type, recipe_types) %>
+        </div>
+        <div class="brew-profile col s3">
+            Equipment Profile
+            <a href="#equipment"><%= image_tag("icon-advanced.png", height: "15", alt: "Edit equipment")%></a>
+        </div>
+    </div><!-- ABOUT BREW -->
+    <div class="divider"></div>
+    <div class="brewday-basics amber darken-4 row">
+        <div class="brewday-mash scrollable col s4">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Mash</th>
+                        <th>Mash Length: 60<a href="#mash"><%= image_tag("icon-advanced.png", height: "15", alt: "Edit Mash")%></a></th>
+                    </tr>
+                    <tr>
+                        <td>Total Malt:</td>
+                        <td>(total)</td>
+                    </tr>
+                    <tr>
+                        <td>Malt</td>
+                        <td>Malt amount</td>
+                    </tr>
+                    <tr>
+                        <td>Malt</td>
+                        <td>Malt amount</td>
+                    </tr>
+                    <tr>
+                        <td>Malt</td>
+                        <td>Malt amount</td>
+                    </tr>
+                    <tr>
+                        <td>Malt</td>
+                        <td>Malt amount</td>
+                    </tr>
+                    <tr>
+                        <td>Malt</td>
+                        <td>Malt amount</td>
+                    </tr>
+                    <tr>
+                        <td>Gypsum</td>
+                        <td>Other amount</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><!-- BREWDAY MASH -->
+        <div class="brewday-boil scrollable yellow darken-4 col s5">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Boil</th>
+                        <th>Boil Length: 120</td>
+                        <th><a href="#boil"><%= image_tag("icon-advanced.png", height: "15", alt: "Edit boil")%></a></th>
+                    </tr>
+                    <tr>
+                        <td>Dextrose</td>
+                        <td>amount</td>
+                        <td>time added</td>
+                    </tr>
+                     <tr>
+                        <td>HOP NAME</td>
+                        <td>HOP amount</td>
+                        <td>HOP time</td>
+                    </tr>
+                     <tr>
+                        <td>HOP NAME</td>
+                        <td>HOP amount</td>
+                        <td>HOP time</td>
+                    </tr>
+                    <tr>
+                        <td>HOP NAME</td>
+                        <td>HOP amount</td>
+                        <td>HOP time</td>
+                    </tr>
+                    <tr>
+                        <td>HOP NAME</td>
+                        <td>HOP amount</td>
+                        <td>HOP time</td>
+                    </tr>
+                    <tr>
+                        <td>HOP NAME</td>
+                        <td>HOP amount</td>
+                        <td>HOP time</td>
+                    </tr>
+                    <tr>
+                        <td>HOP NAME</td>
+                        <td>HOP amount</td>
+                        <td>Whirlpool</td>
+                    </tr>
+                </tbody>
+            </table>     
+        </div><!-- BREWDAY BOIL -->
+        <div class="brewday-numbers col s3">
+            <ul class="center-align">
+                <li>Batch Size: Some gallons<a href="#equipment"><%= image_tag("icon-advanced.png", height: "15", alt: "Edit equipment")%></a></li>
+                <li>Mash Target Temp: TEMP ˚F<a href="#mash"><%= image_tag("icon-advanced.png", height: "15", alt: "Edit Mash")%></a></li>
+                <li>Mash Strike Temp: TEMP ˚F<a href="#mash"><%= image_tag("icon-advanced.png", height: "15", alt: "Edit Mash")%></a></li>
+                <li>Mash Strike Vol: Some Gallons</li>
+                <li>Sparge Vol: Some Gallons</li>
+                <li>Yeast: Yeast NAME<a href="#fermentation"><%= image_tag("icon-advanced.png", height: "15", alt: "Edit Fermentation")%></a></li>
+                <li>Cells Needed: Some big number</li>
+            </ul>
+        </div><!-- BREWDAY NUMBERS -->
+    
+    
+    </div><!-- BREWDAY BASICS -->
+</div><!-- RECIPE SNAPSHOT -->
+<table id="fixed-stats" class="brew-stats orange lighten-2">
+    <tr class="top-bars">
+        <td class="og-bar stat-bar center-align">
+            O.G.
+        </td>
+        <td class="fg-bar stat-bar center-align">
+            F.G.
+        </td>
+        <td class="abv-bar stat-bar center-align">
+            ABV
+        </td>
+    </tr>
+    <tr class="bottom-bars">
+        <td class="ibu-bar stat-bar center-align">
+            IBU
+        </td>
+        <td class="color-bar stat-bar center-align">
+            ˚L
+        </td>
+        <td class="bugu-bar stat-bar center-align">
+            BU:GU
+        </td>
+    </tr>    
+            
+        
+</table><!-- BREW STATS -->
+<div id="adjust-for-menu" class="recipe-forms">
+    
+    <%= render :template => "recipe_fermentables/new" %>
+    
+    <div id="boil" class="divider"></div>
+
+    <%= render partial: 'boil_table', locals: {  } %>
+
+    <div id="fermentation" class="divider"></div>
+
+    <%= render partial: 'fermentation_table', locals: {  } %>
+    
+    <div id="equipment" class="divider"></div>
+    
+    <%= render partial: 'equipment_table', locals: {  } %>
+    
+    <div class="divider"></div>
+    
+    <div class="comment-form forms-div">
+        <h5>Comments</h5>
+    </div><!-- COMMENT FORM -->
+    
+    <%= f.submit "SAVE", class: 'btn' %>
+
+</div><!-- RECIPE FORMS -->
+<% end %>

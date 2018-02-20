@@ -17,5 +17,104 @@
  @import "materialize";
 
  select {
-     display: block;
+    display: block;
  }
+
+ .recipe-snapshot {
+    height: 25vh;
+    width: 100%;
+    
+ }
+
+table {
+    padding: 0px;
+    line-height: 1px;
+    z-index: 90;
+ }
+
+ .about-brew {
+    width: 100%;
+    height: 60px;
+    padding-top: 5px;
+    line-height: 0px;
+ }
+
+ .brewday-basics {
+    height: 25vh;
+    
+ }
+ .scrollable {
+    height: 25vh;
+    overflow-y: auto;
+ }
+
+ .brewday-numbers {
+     height: 25vh;
+     
+ }
+
+ .lower-portion {
+    width: 100%;
+ }
+
+ .brew-stats {
+    width: 25%;
+    height: 69vh;
+    z-index: 100;
+    float: right;
+ }
+
+ .recipe-forms {
+    width: 100%;
+    z-index: 5;
+ }
+
+
+#fixed-menu.fixed { 
+  position: fixed;
+  top: 0px;
+  padding-top: 15px;
+  z-index: 99;
+  width: 100%;
+}
+
+#fixed-stats.fixed {
+    position: fixed;
+    right: 0;
+    top: 230px;
+    z-index: 100;  
+}
+
+#adjust-for-menu.fixed {
+    padding-top: 250px;
+}
+
+.top-bars, .bottom-bars {
+    height: 50%;
+    width: 100%;
+}
+
+.stat-bar {
+
+    width: 25%;
+}
+.forms-div {
+    width: 75%
+}
+
+.input-field label {
+    color: #000;
+}
+
+.input-field input[type=text]:focus + label {
+    color: #000;
+}
+
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+}
+
+.about-brew {
+    margin-bottom: 0;
+}

@@ -1,0 +1,45 @@
+<div class="row">
+    <div class=""><h5>Fermentables</h5></div>
+</div>
+
+<ul class="collapsible" data-collapsible="accordion">
+    <% @fermentables.each do |fermentable| %>
+        <li>
+            <div class="collapsible-header row">
+                <div class="add-button col s2">
+                    <button class="yellow"><%= link_to "ADD", recipe_add_copy_2_path(@recipe.id), method: :add_copy_2 %></button>
+                </div>
+                <div class="col s1">
+                    <% if fermentable.ferm_type == 'Sugar Adjunct' %>
+                        <%= image_tag("icon-sugar.png", height: "15") %>
+                    <% else %>
+                        <%= image_tag("icon-barley.png", height: "15") %>
+                    <% end %>
+                </div>
+                <div class="col s4">
+                    <%= fermentable.name %> 
+                </div>
+                <div class="col s2">
+                    <%= fermentable.color %> ˚L
+                </div>
+                <div class="col s3">
+                    Extract: <%= fermentable.extract %>%
+                </div>
+            </div>
+            <div class="collapsible-body">
+                <div class="row">
+                    <span class="col s5"> Type: <%= fermentable.ferm_type %></span>
+                    <span class="col s5 offset-s2">Max Usage Rate: <%= fermentable.usage_rate %> %</span>
+                </div>
+                <div class="row">
+                    <span class="col s7"> Maltster: <%= fermentable.maltster %></span>
+                    <span class="col s4">Origin:  <%= fermentable.origin %></span>
+                </div>
+                <div class="row">
+                    <span class="col s10">Comment: <%= fermentable.comment %> </span>
+                </div>
+            </div>
+        </li>
+    <% end %>
+</ul>
+

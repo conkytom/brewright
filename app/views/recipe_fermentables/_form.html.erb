@@ -1,9 +1,9 @@
-<%= form_for [hop] do |f| %>
-    <% if hop.errors.any? %>
+<%= form_for [@recipe, RecipeFermentable.new], url: recipe_create_custom_ferm_path(@recipe.id) do |f| %>
+    <% if @recipe_fermentable.errors.any? %>
         <div class="alert alert-danger">
-            <h4><%= pluralize(hop.errors.count, "error") %>.</h4>
+            <h4><%= pluralize(@recipe_fermentable.errors.count, "error") %>.</h4>
             <ul>
-                <% hop.errors.full_messages.each do |msg| %>
+                <% @recipe_fermentable.errors.full_messages.each do |msg| %>
                     <li><%= msg %></li>
                 <% end %>
             </ul>
@@ -14,24 +14,40 @@
             <small>* required</small>
             <div class="row">
                 <div class="input-field col s6">
-                    <%= form_group_tag(hop.errors[:name]) do %>
-                        <label for="name">Hop Variety Name*</label>
+                    <%= form_group_tag(@recipe_fermentable.errors[:name]) do %>
+                        <label for="name">Fermentable Name*</label>
                         <%= f.text_field :name, class: 'form-control' %>
                     <% end %>
                 </div>
-                <div class="col s4 offset-s1">
-                    <label for="hop_type">Hop Type</label>
-                    <%= f.select(:hop_type, hop_types) %>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                    <%= form_group_tag(@recipe_fermentable.errors[:alpha_acid]) do %>
+                        <label for="extract">% Extract*</label> 
+                        <%= f.text_field :extract, class: 'form-control' %>
+                    <% end %>
+                </div>
+                <div class="col s4 offset-s2">
+                    <label for="ferm_type">Fermentable Type</label>
+                    <%= f.select(:ferm_type, ferm_types) %>
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s3">
-                    <%= form_group_tag(hop.errors[:alpha_acid]) do %>
-                        <label for="alpha_acid">% Alpha Acid*</label> 
-                        <%= f.text_field :alpha_acid, class: 'form-control' %>
-                    <% end %>
+                <div class="input-field col s4">
+                    <label for="color">Color(˚L)*</label>
+                    <%= f.number_field :color, class: 'form-control' %>
                 </div>
-                <div class="input-field col s6 offset-s3">
+                <div class="input-field col s5 offset-s2">
+                    <label for="usage_rate">Max Usage Rate(%)</label>
+                    <%= f.number_field :usage_rate, class: 'form-control' %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <label for="maltster">Maltster</label>
+                    <%= f.text_field :maltster, class: 'form-control' %>
+                </div>
+                <div class="input-field col s6">
                     <label for="origin">Country of Origin</label> 
                     <%= f.text_field :origin, class: 'form-control' %>   
                 </div>
@@ -43,11 +59,6 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col s2">
-                    <% if hop.id %>
-                        <%= link_to "DELETE", hop, method: :delete, class: 'btn red darken-4', data: { confirm: 'Are you sure you want to delete this hop variety?'} %>
-                    <% end %>
-                </div>
                 <div class="col s2 offset-s7">
                     <%= f.submit "SAVE", class: 'btn orange darken-3' %>
                 </div>

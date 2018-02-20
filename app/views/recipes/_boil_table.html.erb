@@ -1,0 +1,61 @@
+<%= form_for [@recipe] do |f| %>
+<table class="boil-forms forms-div">
+    <tr class="light-green lighten-2">
+        <td colspan="4"><h5>Boil & Hops</h5></td>
+        <td class="input-field">
+            <%= f.text_field :boil_length, class: 'form-control' %>
+            <label for="boil_length">Boil Length</label>
+        </td>
+        <td colspan="3">mins</td>
+        <td colspan="2" class="right-align"><small>Kettle Sour?</small></td>
+    </tr>
+    <tr>
+        <td colspan="3">ENTIRE HOPHOP NAME</td>
+        <td>AMNT OZ^</td>
+        <td>88.8 %AA</td>
+        <td>TIME MIN</td>
+        <td>LOCATION</td>
+        <td>##IBUs</td>
+        <td><%= image_tag("icon-advanced.png", height: "15", alt: "Edit equipment")%></td>
+        <td>X</td>
+    </tr>
+    <tr>
+        <td colspan="5"><button data-target="modal_add_hop" class="btn modal-trigger light-green darken-4">Add Hops</button></td>
+        <td colspan="5" class="right-align"><button data-target="modal_create_hop" class="btn modal-trigger light-green darken-4">Create Custom</button></td>
+    </tr>
+    <tr>
+        <td colspan="3">AUTOPOPULATED</td>
+        <td>AMNT LBS^</td>
+        <td></td>
+        <td>TIME mins</td>
+        <td>LOCATION</td>
+        <td></td>
+        <td><%= image_tag("icon-advanced.png", height: "15", alt: "Edit equipment")%></td>
+        <td>X</td>
+    </tr>
+    <tr>
+        <td colspan="5"><button data-target="modal_add_other" class="btn modal-trigger light-green darken-3">Add Other</button></td>
+        <td colspan="5" class="right-align"><button data-target="modal_create_other" class="btn modal-trigger light-green darken-3">Create custom</button></td>
+    </tr>
+</table><!-- BOIL FORMS -->
+<div id="modal_add_hop" class="modal">
+    <div class="modal-content">
+        ADD HOP 
+    </div>
+</div>
+<div id="modal_create_hop" class="modal">
+    <div class="modal-content">
+        CREATE HOP 
+    </div>
+</div>
+<div id="modal_add_other" class="modal">
+    <div class="modal-content">
+        ADD OTHER
+    </div>
+</div>
+<div id="modal_create_other" class="modal">
+    <div class="modal-content">
+        CREATE OTHER 
+    </div>
+</div>
+<% end %>

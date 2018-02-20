@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130222620) do
+ActiveRecord::Schema.define(version: 20180220012528) do
 
   create_table "boils", force: :cascade do |t|
     t.integer "length"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20180130222620) do
     t.string "origin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_fermentables_on_name", unique: true
   end
 
   create_table "fermentations", force: :cascade do |t|
@@ -82,6 +83,7 @@ ActiveRecord::Schema.define(version: 20180130222620) do
     t.string "origin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_hops_on_name", unique: true
   end
 
   create_table "mashes", force: :cascade do |t|
@@ -109,6 +111,7 @@ ActiveRecord::Schema.define(version: 20180130222620) do
     t.string "amount_unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_others_on_name", unique: true
   end
 
   create_table "recipe_fermentables", force: :cascade do |t|
@@ -127,6 +130,8 @@ ActiveRecord::Schema.define(version: 20180130222620) do
     t.string "origin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "recipe_id"
+    t.index ["name"], name: "index_recipe_fermentables_on_name", unique: true
   end
 
   create_table "recipe_hops", force: :cascade do |t|
@@ -143,6 +148,8 @@ ActiveRecord::Schema.define(version: 20180130222620) do
     t.string "origin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "recipe_id"
+    t.index ["name"], name: "index_recipe_hops_on_name", unique: true
   end
 
   create_table "recipe_others", force: :cascade do |t|
@@ -155,6 +162,8 @@ ActiveRecord::Schema.define(version: 20180130222620) do
     t.string "amount_unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "recipe_id"
+    t.index ["name"], name: "index_recipe_others_on_name", unique: true
   end
 
   create_table "recipe_yeasts", force: :cascade do |t|
@@ -174,6 +183,8 @@ ActiveRecord::Schema.define(version: 20180130222620) do
     t.string "form"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "recipe_id"
+    t.index ["name"], name: "index_recipe_yeasts_on_name", unique: true
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -196,6 +207,39 @@ ActiveRecord::Schema.define(version: 20180130222620) do
     t.string "bu_gu_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "grain_bill"
+    t.integer "mash_length"
+    t.integer "mash_target_temp"
+    t.integer "mash_strike_temp"
+    t.decimal "mash_strike_volume"
+    t.decimal "mash_sparge_volume"
+    t.decimal "mash_efficiency"
+    t.decimal "mash_thickness"
+    t.decimal "mash_grain_absorption"
+    t.integer "grain_temp"
+    t.integer "fermentation_primary_time"
+    t.string "fermentation_primary_time_unit"
+    t.integer "fermentation_primary_temp"
+    t.boolean "fermentation_secondary"
+    t.integer "fermentation_secondary_time"
+    t.string "fermentation_secondary_time_unit"
+    t.integer "fermentation_secondary_temp"
+    t.decimal "fermentation_volume"
+    t.string "fermentation_volume_unit"
+    t.string "fermentation_location"
+    t.integer "boil_length"
+    t.string "boil_length_unit"
+    t.decimal "boil_pre_volume"
+    t.decimal "boil_post_volume"
+    t.string "boil_volume_unit"
+    t.decimal "equipment_kettle_volume"
+    t.string "equipment_kettle_volume_unit"
+    t.decimal "equipment_loss"
+    t.string "equipment_loss_unit"
+    t.decimal "equipment_evaporation_rate"
+    t.string "equipment_evaporation_rate_unit"
+    t.decimal "equipment_wort_shrinkage"
+    t.text "comment"
   end
 
   create_table "yeasts", force: :cascade do |t|
@@ -215,6 +259,7 @@ ActiveRecord::Schema.define(version: 20180130222620) do
     t.string "form"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_yeasts_on_name", unique: true
   end
 
 end

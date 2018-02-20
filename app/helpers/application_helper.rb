@@ -5,4 +5,9 @@ module ApplicationHelper
 
         content_tag :div, capture(&block), class: css_class
     end
+
+    def time_units
+        [['Minutes', 'Minutes'], ['Hours', 'Hours'], ['Days', 'Days'], ['Weeks', 'Weeks']]
+    end
+
 end

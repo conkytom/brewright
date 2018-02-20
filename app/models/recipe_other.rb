@@ -1,8 +1,9 @@
 class RecipeOther < ApplicationRecord
-    has_one :other
+    
     belongs_to :mash
     belongs_to :boil
     belongs_to :fermentation
+    belongs_to :recipe
 
     validates :name, length: {minimum: 1}, presence: true
 
