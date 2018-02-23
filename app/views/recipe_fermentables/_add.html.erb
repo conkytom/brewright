@@ -7,7 +7,7 @@
         <li>
             <div class="collapsible-header row">
                 <div class="add-button col s2">
-                    <button class="yellow"><%= link_to "ADD", recipe_add_copy_2_path(@recipe.id), method: :add_copy_2 %></button>
+                    <button class="yellow"><%= link_to "ADD", recipe_add_copy_2_path(recipe_id: @recipe.id, fermentable_id: fermentable.id), method: :add_copy_2 %></button>
                 </div>
                 <div class="col s1">
                     <% if fermentable.ferm_type == 'Sugar Adjunct' %>

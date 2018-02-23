@@ -31,6 +31,7 @@ class RecipesController < ApplicationController
     @recipe_others = RecipeOther.all
     @fermentables = Fermentable.all
     
+    
   
   end
 
@@ -44,7 +45,7 @@ class RecipesController < ApplicationController
 
   def add_copy_2
     @recipe = Recipe.find(params[:recipe_id])
-    @fermentable = Fermentable.find(params[:id])
+    @fermentable = Fermentable.find(params[:fermentable_id])
     @recipe_fermentable = @recipe.recipe_fermentables.build(params[@fermentable])
     
     if @recipe_fermentable.save
