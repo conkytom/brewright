@@ -1,57 +1,57 @@
-<%= form_for [@recipe] do |f| %>
 <table class="mash-forms forms-div">
-        <tr class="yellow lighten-1">
-            <td colspan="3"><h5 class="">Mash & Fermentables</h5></td>
-            <td class="mash-target input-field">
-                <%= f.number_field :mash_target_temp, :value => 156, class: 'form-control' %>
-                <label for="mash_target_temp">Target Mash Temp</label>
-            <td colspan="2">˚F</td>
-            </td>
-            <td class="mash-length input-field">
-                <%= f.number_field :mash_length, :value => 60, class: 'form-control' %>
-                <label for="mash_length">Mash Length</label>
-            </td>
-            <td>mins</td>
-            <td colspan="2" class="right-align"><small>Step Mash or Decotion?</small></td>
-        </tr>
-        <% @recipe.recipe_fermentables.each do |fermentable| %>
-            <tr class="included-fermentables">
-                <td colspan="3">FERMENTABLE NAME</td>
-                <td>AMNT LBS^</td>
-                <td>Col˚L</td>
-                <td>EXT%</td>
-                <td>LOCATION</td>
-                <td>BILL%</td>
-                <td><%= image_tag("icon-advanced.png", height: "15", alt: "Edit equipment")%></td>
-                <td>X</td>
+<%= semantic_form_for @recipe do |f| %>
+    <% f.inputs do %>
+            <tr class="yellow lighten-1">
+                <td colspan="3"><h5 class="">Mash & Fermentables</h5></td>
+                <td class="mash-target input-field">
+                    <%= f.number_field :mash_target_temp %>
+                    <label for="mash_target_temp">Target Mash Temp</label>
+                </td>
+                <td colspan="2">˚F</td>
+                <td class="mash-length input-field">
+                    <%= f.number_field :mash_length %>
+                    <label for="mash_length">Mash Length</label>
+                </td>
+                <td>mins</td>
+                <td colspan="2" class="right-align"><small>Step Mash or Decotion?</small></td>
             </tr>
-        <% end %>
-            <tr class="add-fermentable">
-                <td colspan="5"><button data-target="modal_add_fermentable" class="btn modal-trigger yellow darken-4">Add Fermentable</button></td>
-                <td colspan="5" class="right-align"><button data-target="modal_create_fermentable" class="btn modal-trigger yellow darken-4">Create Custom</button></td>
+            <div class="included-fermentables nested-fields">    
+                <%= f.semantic_fields_for :recipe_fermentables do |fermentable| %>
+                    <% render 'recipe_fermentables/fermentables', :f => fermentable %>
+                <% end %>
+            </div>
             </tr>
-        <% @recipe.recipe_others.each do |other| %>
-            <tr>
-                <td colspan="3">OTHER MASH INGREDIENT</td>
-                <td>AMNT LBS^</td>
-                <td colspan="2"></td>
-                <td>LOCATION</td>
-                <td></td>
-                <td><a data-target="modal_edit_fermentable<%= fermentable.id %>" class="modal-trigger "><%= image_tag("icon-advanced.png", height: "15", alt: "Edit this fermentable")%></a></td>
-                    <div class="modal" id="modal_edit_fermentable<%= fermentable.id %>">
-                        <div class="modal-content">
-                            <h4>Edit Fermentable</h4>
-                            <%= render partial: 'form', locals: { recipe_fermentable: recipe_fermentable, id: recipe_fermentable.id } %>
-                        </div>
-                    </div>
-                <td>X</td>
-            </tr>
-        <% end %>
-        <tr>
-            <td colspan="5"><button data-target="modal_add_other" class="btn modal-trigger yellow darken-3">Add Other</button></td>
-            <td colspan="5" class="right-align"><button data-target="modal_create_other" class="btn modal-trigger yellow darken-3">Create Custom</button></td>
-        </tr>
-    </table><!-- MASH FORMS-->
+                <tr class="add-fermentable">
+                    <td colspan="5"><button data-target="modal_add_fermentable" class="btn modal-trigger yellow darken-4">Add Fermentable</button></td>
+                    <!-- <td colspan="5" class="right-align"><button data-target="modal_create_fermentable" class="btn modal-trigger yellow darken-4">Create Custom</button></td> -->
+                </tr>
+                <% @recipe.recipe_others.each do |other| %>
+                    <tr>
+                        <td colspan="3">OTHER MASH INGREDIENT</td>
+                        <td>AMNT LBS^</td>
+                        <td colspan="2"></td>
+                        <td>LOCATION</td>
+                        <td></td>
+                        <td><a data-target="modal_edit_fermentable<%= recipe_fermentable.id %>" class="modal-trigger "><%= image_tag("icon-advanced.png", height: "15", alt: "Edit this fermentable")%></a></td>
+                            <div class="modal" id="modal_edit_fermentable<%= recipe_fermentable.id %>">
+                                <div class="modal-content">
+                                    <h4>Edit Other Ingredient</h4>
+                                    
+                                </div>
+                            </div>
+                        <td>X</td>
+                    </tr>
+                <% end %>
+                <tr>
+                    <td colspan="5"><button data-target="modal_add_other" class="btn modal-trigger yellow darken-3">Add Other</button></td>
+                    <td colspan="5" class="right-align"><button data-target="modal_create_other" class="btn modal-trigger yellow darken-3">Create Custom</button></td>
+                </tr>
+        </table><!-- MASH FORMS-->
+        
+    <% end %>
+<% end %>
+
+<!-- MODALS -->
 <div id="modal_add_fermentable" class="modal">
     <div class="modal-content">
         <%= render partial: 'recipe_fermentables/add' %>
@@ -60,7 +60,7 @@
 <div id="modal_create_fermentable" class="modal">
     <div class="modal-content">
         <h5>CREATE CUSTOM FERMENTABLE</h5>
-        <%= render partial: 'recipe_fermentables/form' %>
+        
     </div>
 </div>
 <div id="modal_add_other" class="modal">
@@ -73,4 +73,3 @@
         CREATE OTHER
     </div>
 </div>
-<% end %>

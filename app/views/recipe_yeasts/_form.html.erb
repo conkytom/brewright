@@ -16,7 +16,7 @@
                 <div class="input-field col s6">
                     <%= form_group_tag(hop.errors[:name]) do %>
                         <label for="name">Hop Variety Name*</label>
-                        <%= f.text_field :name, class: 'form-control' %>
+                        <%= f.text_field :name %>
                     <% end %>
                 </div>
                 <div class="col s4 offset-s1">
@@ -28,18 +28,18 @@
                 <div class="input-field col s3">
                     <%= form_group_tag(hop.errors[:alpha_acid]) do %>
                         <label for="alpha_acid">% Alpha Acid*</label> 
-                        <%= f.text_field :alpha_acid, class: 'form-control' %>
+                        <%= f.text_field :alpha_acid %>
                     <% end %>
                 </div>
                 <div class="input-field col s6 offset-s3">
                     <label for="origin">Country of Origin</label> 
-                    <%= f.text_field :origin, class: 'form-control' %>   
+                    <%= f.text_field :origin %>   
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <label for="comment">Comments</label>
-                    <%= f.text_area :comment, rows: 8, class: 'form-control' %>
+                    <%= f.text_area :comment, rows: 8 %>
                 </div>
             </div>
             <div class="row">

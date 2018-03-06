@@ -10,12 +10,8 @@ Rails.application.routes.draw do
     resources :recipe_yeasts
     resources :recipe_others
     post '/create_custom' => 'recipes#create_custom_ferm', as: :create_custom_ferm
-    post '/add_copy' => 'recipes#add_copy', as: :add_copy
+    post '/customize_ferm' => 'recipes#customize_ferm', as: :customize_ferm
     post '/add_copy_2' => 'recipes#add_copy_2', as: :add_copy_2
-  end
-
-  resources :recipe_fermentables do
-    post '/create_custom' => 'recipe_fermentables#create_custom', as: :create_custom
   end
 
   get 'welcome/index'

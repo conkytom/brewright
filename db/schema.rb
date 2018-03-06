@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180220012528) do
+ActiveRecord::Schema.define(version: 20180226012002) do
 
   create_table "boils", force: :cascade do |t|
     t.integer "length"
@@ -51,7 +51,6 @@ ActiveRecord::Schema.define(version: 20180220012528) do
     t.string "origin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_fermentables_on_name", unique: true
   end
 
   create_table "fermentations", force: :cascade do |t|
@@ -83,7 +82,6 @@ ActiveRecord::Schema.define(version: 20180220012528) do
     t.string "origin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_hops_on_name", unique: true
   end
 
   create_table "mashes", force: :cascade do |t|
@@ -111,7 +109,6 @@ ActiveRecord::Schema.define(version: 20180220012528) do
     t.string "amount_unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_others_on_name", unique: true
   end
 
   create_table "recipe_fermentables", force: :cascade do |t|
@@ -131,7 +128,6 @@ ActiveRecord::Schema.define(version: 20180220012528) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "recipe_id"
-    t.index ["name"], name: "index_recipe_fermentables_on_name", unique: true
   end
 
   create_table "recipe_hops", force: :cascade do |t|
@@ -149,7 +145,6 @@ ActiveRecord::Schema.define(version: 20180220012528) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "recipe_id"
-    t.index ["name"], name: "index_recipe_hops_on_name", unique: true
   end
 
   create_table "recipe_others", force: :cascade do |t|
@@ -163,7 +158,6 @@ ActiveRecord::Schema.define(version: 20180220012528) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "recipe_id"
-    t.index ["name"], name: "index_recipe_others_on_name", unique: true
   end
 
   create_table "recipe_yeasts", force: :cascade do |t|
@@ -184,7 +178,6 @@ ActiveRecord::Schema.define(version: 20180220012528) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "recipe_id"
-    t.index ["name"], name: "index_recipe_yeasts_on_name", unique: true
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -259,7 +252,6 @@ ActiveRecord::Schema.define(version: 20180220012528) do
     t.string "form"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_yeasts_on_name", unique: true
   end
 
 end

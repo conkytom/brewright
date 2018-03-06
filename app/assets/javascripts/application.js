@@ -15,4 +15,5 @@
 //= require jquery
 //= require materialize-sprockets
 //= require modals
+//= require cocoon
 //= require_tree .

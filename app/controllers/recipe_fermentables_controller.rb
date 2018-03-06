@@ -9,10 +9,7 @@ class RecipeFermentablesController < ApplicationController
   end
 
   def new
-    @recipe = Recipe.find(params[:recipe_id])
-    @recipe_fermentable = RecipeFermentable.new(recipe_fermentable_params)
-
-    
+  
   end
 
   def create
@@ -27,18 +24,34 @@ class RecipeFermentablesController < ApplicationController
   end
 
   def destroy
+    @recipe = Recipe.find(params[:recipe_id])
     @recipe_fermentable = RecipeFermentable.find(params[:id])
+    if @recipe_fermentable.destroy
+      redirect_to edit_recipe_path(@recipe.id)
+    end
 
   end
 
   def edit
+    
     @recipe_fermentable = RecipeFermentable.find(params[:id])
+    @recipe_fermentable.assign_attributes(recipe_fermentable_params)
+    puts @recipe_fermentable.name
+    puts recipe_id
+    
   end
 
   def update
+    puts @recipe_fermentable.name
+    puts recipe_id
     @recipe_fermentable = RecipeFermentable.find(params[:id])
     
     @recipe_fermentable.assign_attributes(recipe_fermentable_params)
+    @recipe_fermentable.save!
+    
+    if @recipe_fermentable.save
+      redirect_to edit_recipe_path(recipe_id)
+    end
     
   end
 
@@ -54,7 +67,7 @@ class RecipeFermentablesController < ApplicationController
   end
 
   def recipe_fermentable_params
-    params.require(:recipe_fermentable).permit(:name, :color, :color_unit, :extract, :ferm_type, :origin, :maltster, :usage_rate, :comment, :amount, :amount_unit, :percent_malt_bill, :location, :recipe_id)
+    params.require(:recipe, :recipe_fermentable).permit(:name, :color, :color_unit, :extract, :ferm_type, :origin, :maltster, :usage_rate, :comment, :amount, :amount_unit, :percent_malt_bill, :location, :recipe_id)
   end
   
 end
