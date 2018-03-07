@@ -22,14 +22,16 @@ class RecipesController < ApplicationController
     @recipe_fermentables = RecipeFermentable.where(recipe_id: @recipe.id) 
     @recipe_hops = RecipeHop.where(recipe_id: @recipe.id) 
     @recipe_yeasts = RecipeFermentable.where(recipe_id: @recipe.id)
-    @recipe_others = RecipeFermentable.where(recipe_id: @recipe.id)
+    @recipe_others = RecipeOther.where(recipe_id: @recipe.id)
     @fermentables = Fermentable.all
+    @hops = Hop.all
+    @yeasts = Yeast.all
+    @others = Other.all
     @recipe.save!
   end
 
   def update
     @recipe = Recipe.find(params[:id])
-    @recipe_fermentables = RecipeFermentable.where(recipe_id: @recipe.id) 
     @recipe.assign_attributes(recipe_params)
     @recipe.save!
     if @recipe.save
@@ -37,20 +39,56 @@ class RecipesController < ApplicationController
     end
   end
 
-  def add_copy_2
+  def add_copy_ferm
     @recipe = Recipe.find(params[:recipe_id])
     @fermentable = Fermentable.find(params[:fermentable_id])
     recipe_fermentable = RecipeFermentable.create(@fermentable.attributes.except("id", "created_at", "updated_at"))
     recipe_fermentable.recipe = @recipe
-    puts recipe_fermentable.attributes
-    puts recipe_fermentable.save
-    puts recipe_fermentable.attributes
     if recipe_fermentable.save
       redirect_to edit_recipe_path(@recipe.id)
     end
-
   end
   
+  def add_copy_hop
+    @recipe = Recipe.find(params[:recipe_id])
+    @hop = Hop.find(params[:hop_id])
+    recipe_hop = RecipeHop.create(@hop.attributes.except("id", "created_at", "updated_at"))
+    recipe_hop.recipe = @recipe
+    if recipe_hop.save
+      redirect_to edit_recipe_path(@recipe.id)
+    end
+  end
+
+  def add_copy_yeast
+    @recipe = Recipe.find(params[:recipe_id])
+    @yeast = Yeast.find(params[:yeast_id])
+    recipe_yeast = RecipeYeast.create(@yeast.attributes.except("id", "created_at", "updated_at"))
+    recipe_yeast.recipe = @recipe
+    if recipe_yeast.save
+      redirect_to edit_recipe_path(@recipe.id)
+    end
+  end
+
+  def add_copy_other
+    @recipe = Recipe.find(params[:recipe_id])
+    @other = Other.find(params[:other_id])
+    recipe_other = RecipeOther.create(@other.attributes.except("id", "created_at", "updated_at"))
+    recipe_other.recipe = @recipe
+    if recipe_other.save
+      redirect_to edit_recipe_path(@recipe.id)
+    end
+  end
+
+  def add_copy_thing
+    @recipe = Recipe.find(params[:recipe_id])
+    @thing = Thing.find(params[:thing_id])
+    recipe_thing = RecipeThing.create(@thing.attributes.except("id", "created_at", "updated_at"))
+    recipe_thing.recipe = @recipe
+    if recipe_fermentable.save
+      redirect_to edit_recipe_path(@recipe.id)
+    end
+  end
+
   def recipe_params
     params.require(:recipe).permit(
       :name, 
@@ -104,9 +142,9 @@ class RecipesController < ApplicationController
       :equipment_wort_shrinkage,
       :comment,
       recipe_fermentables_attributes: RecipeFermentable.attribute_names.map(&:to_sym).push(:_destroy),
-      recipe_hops_attributes:         RecipeHop.attribute_names.map(&:to_sym).push(:_destroy),
-      recipe_yeasts_attributes:       RecipeYeast.attribute_names.map(&:to_sym).push(:_destroy),
-      recipe_others_attributes:       RecipeOther.attribute_names.map(&:to_sym).push(:_destroy)
+      recipe_hops_attributes: RecipeHop.attribute_names.map(&:to_sym).push(:_destroy),
+      recipe_yeasts_attributes: RecipeYeast.attribute_names.map(&:to_sym).push(:_destroy),
+      recipe_others_attributes: RecipeOther.attribute_names.map(&:to_sym).push(:_destroy)
       )
   end
 end

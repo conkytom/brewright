@@ -9,9 +9,10 @@ Rails.application.routes.draw do
     resources :recipe_hops
     resources :recipe_yeasts
     resources :recipe_others
-    post '/create_custom' => 'recipes#create_custom_ferm', as: :create_custom_ferm
-    post '/customize_ferm' => 'recipes#customize_ferm', as: :customize_ferm
-    post '/add_copy_2' => 'recipes#add_copy_2', as: :add_copy_2
+    post '/add_copy_ferm'  => 'recipes#add_copy_ferm',  as: :add_copy_ferm
+    post '/add_copy_hop'   => 'recipes#add_copy_hop',   as: :add_copy_hop
+    post '/add_copy_yeast' => 'recipes#add_copy_yeast', as: :add_copy_yeast
+    post '/add_copy_other' => 'recipes#add_copy_other', as: :add_copy_other
   end
 
   get 'welcome/index'

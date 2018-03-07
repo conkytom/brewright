@@ -1,0 +1,43 @@
+<div class="row">
+    <div class=""><h5>Yeasts</h5></div>
+</div>
+
+<ul class="collapsible" data-collapsible="accordion">
+    <% @yeasts.each do |yeast| %>
+        <li>
+            <div class="collapsible-header row">
+                <div class="add-button col s2">
+                    <button class="yellow"><%= link_to "ADD", recipe_add_copy_yeast_path(recipe_id: @recipe.id, yeast_id: yeast.id), method: :add_copy_yeast %></button>
+                </div>
+                <div class="col s1">
+                    <%= image_tag("icon-yeast.png", height: "15")%>
+                </div>
+                <div class="col s4">
+                    <%= yeast.name %> 
+                </div>
+                <div class="col s3">
+                    <%= yeast.yeast_type %>
+                </div>
+                <div class="col s2">
+                    Attenuation: <%= yeast.attenuation %> %
+                </div>
+            </div>
+            <div class="collapsible-body">
+                <div class="row">
+                    <span class="col s3">Flocculation: <%= yeast.flocculation %></span>
+                    <span class="col s3">Tolerance: <%= yeast.tolerance %> %ABV</span>
+                    <span class="col s3">Temp Range: <%= yeast.temp_range %> ˚F</span>
+                </div>
+                <div class="row">
+                    <span class="col s3">Lab: <%= yeast.lab %></span>
+                    <span class="col s3">Product ID: <%= yeast.product_id %></span>
+                    <span class="col s3">Form: <%= yeast.form %></span>
+                </div>
+                <div class="row">
+                    <span class="col s12">Comment: <%= yeast.comment %> </span>
+                </div>
+            </div>
+        </li>
+    <% end %>
+</ul>
+

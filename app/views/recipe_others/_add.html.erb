@@ -1,0 +1,27 @@
+<div class="row">
+    <div class=""><h5>Other Ingredients</h5></div>
+</div>
+
+<ul class="collapsible" data-collapsible="accordion">
+    <% @others.each do |other| %>
+        <li>
+            <div class="collapsible-header row">
+                <div class="add-button col s2">
+                    <button class="yellow"><%= link_to "ADD", recipe_add_copy_other_path(recipe_id: @recipe.id, other_id: other.id), method: :add_copy_other %></button>
+                </div>
+                <div class="col s1">
+                    <%= image_tag("icon-ingredient.png", height: "15")%>
+                </div>
+                <div class="col s4">
+                    <%= other.name %> 
+                </div>
+            </div>
+            <div class="collapsible-body">
+                <div class="row">
+                    <span class="col s9">Comment: <%= other.comment %> </span>
+                </div>
+            </div>
+        </li>
+    <% end %>
+</ul>
+

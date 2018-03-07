@@ -25,16 +25,17 @@
                     <tbody>
                         <tr>
                             <th>Mash</th>
-                            <th>Mash Length: <%= @recipe.mash_length %><a href="#mash"><%= image_tag("icon-advanced.png", height: "15", alt: "Edit Mash")%></a></th>
+                            <th colspan="2">Mash Length: <%= @recipe.mash_length %><a href="#mash"><%= image_tag("icon-advanced.png", height: "15", alt: "Edit Mash")%></a></th>
                         </tr>
                         <tr>
                             <td>Total Malt:</td>
-                            <td><%= @recipe.grain_bill%>Lbs</td>
+                            <td colsspan="2"><%= @recipe.grain_bill%>Lbs</td>
                         </tr>
                         <% @recipe.recipe_fermentables.each do |fermentable| %>
                             <tr>
                                 <td><%= fermentable.name %></td>
-                                <td><%= fermentable.amount %></td>
+                                <td><%= fermentable.amount %> Lbs</td>
+                                <td><%= fermentable.location %></td>
                             </tr>
                         <% end %>
                         <% @recipe.recipe_others.where(location: 'Mash') do |other| %>
@@ -50,17 +51,25 @@
                 <table>
                     <tbody>
                         <tr>
-                            <th>Boil</th>
+                            <th colspan="2">Boil</th>
                             <th>Boil Length: <%= @recipe.boil_length %>mins</td>
                             <th><a href="#boil"><%= image_tag("icon-advanced.png", height: "15", alt: "Edit boil")%></a></th>
                         </tr>
-                        <% @recipe.recipe_hops.each do |fermentable| %>
+                        <% @recipe.recipe_hops.each do |hop| %>
+                            <tr>
+                                <td><%= hop.name %></td>
+                                <td><%= hop.amount %> Oz</td>
+                                <td class="center-align"><%= hop.time %> Mins</td>
+                                <td><%= hop.location %></td>
+                            </tr>
+                        <% end %>
+                        <% @recipe.recipe_fermentables.where(location: 'Boil') do |fermentable| %>
                             <tr>
                                 <td><%= fermentable.name %></td>
                                 <td><%= fermentable.amount %></td>
                             </tr>
                         <% end %>
-                        <% @recipe.recipe_others.each do |other| %>
+                        <% @recipe.recipe_others.where(location: 'Boil') do |other| %>
                             <tr>
                                 <td><%= other.name %></td>
                                 <td><%= other.amount %></td>
@@ -109,9 +118,9 @@
             
     </table><!-- BREW STATS -->
     <div id="adjust-for-menu" class="recipe-forms">
-        
+
         <table class="mash-forms forms-div">
-            <tr class="mash-bascs yellow lighten-1">
+            <tr class="mash-basics yellow lighten-1">
                 <td colspan="3"><h5>Mash & Fermentables</h5></td>
                 <td colspan="2">Mash Temp:</td>
                 <td class="mash-target input-field">
@@ -124,11 +133,9 @@
                 </td>
                 <td colspan="3">mins</td>
             </tr><!-- MASH BASICS -->
-            <!-- WHERE COCOON SHOULD WORK ITS MAGIC -->
             <div class="included-fermentables nested-fields">    
                 <%= f.semantic_fields_for :recipe_fermentables do |fermentable| %>
-                    <tr class="fermentable-row">
-                        
+                    <tr class="fermentable-row">    
                             <td colspan="3"><%= fermentable.text_field :name %></td>
                             <td class="fermentable-amount"><%= fermentable.number_field :amount, step: 0.1 %></td>
                             <td>LBS^</td>
@@ -144,11 +151,10 @@
                             <% end %>
                             </td>
                             <td> <%= fermentable.object.percent_malt_bill %>%</td>
-                            <td><%= link_to "X", recipe_recipe_fermentable_path(recipe_id: @recipe.id, id: f.object.id), method: :delete %></td>
-                        
+                            <td><%= link_to "X", recipe_recipe_fermentable_path(recipe_id: @recipe.id, id: fermentable.object.id), method: :delete %></td>
                     </tr>
                 <% end %>
-            </div>
+            </div><!-- INCLUDED FERMENTABLES -->
             <tr class="add-create-fermentable">
                 <td colspan="6"><button data-target="modal_add_fermentable" class="btn modal-trigger yellow darken-4">Add Fermentable</button></td>
                 <td colspan="6" class="right-align"><button data-target="modal_create_fermentable" class="btn modal-trigger yellow darken-4">Create Custom</button></td>
@@ -167,49 +173,127 @@
                 </div>
             </div>
         <!-- MODALS for MASH -->
-        
+
         <div id="boil" class="divider"></div>
 
-        <%= render partial: 'boil_table', locals: {  } %>
+        <table class="boil-forms forms-div">
+            <tr class="boil-basics light-green lighten-2">
+                <td colspan="4"><h5>Boil & Hops</h5></td>
+                <td>Boil Length:</td>
+                <td colspan="4" class="input-field">
+                    <%= f.text_field :boil_length %>
+                </td>
+                <td colspan="3">mins</td>
+            </tr><!-- BOIL BASICS -->
+            <div class="included-hops nested-fields">
+                <%= f.semantic_fields_for :recipe_hops do |hop| %>
+                    <tr class="hop-row">    
+                        <td colspan="2"><%= hop.text_field :name %></td>
+                        <td class="hop-amount"><%= hop.number_field :amount, step: 0.01 %></td>
+                        <td>Oz^</td>
+                        <td><%= hop.number_field :alpha_acid %></td>
+                        <td>%AA</td>
+                        <td><%= hop.number_field :time %></td>
+                        <td>Mins</td>
+                        <td colspan="2">
+                            <%= hop.select(:location, hop_locations) %>
+                        </td>
+                        <td> <%= hop.object.ibu %>IBUs</td>
+                        <td><%= link_to "X", recipe_recipe_hop_path(recipe_id: @recipe.id, id: hop.object.id), method: :delete %></td>
+                    </tr>
+                <% end %>
+            </div><!-- INCLUDED HOPS -->
+            <tr>
+                <td colspan="6"><button data-target="modal_add_hop" class="btn modal-trigger light-green darken-4">Add Hops</button></td>
+                <td colspan="6" class="right-align"><button data-target="modal_create_hop" class="btn modal-trigger light-green darken-4">Create Custom</button></td>
+            </tr>
+        </table><!-- BOIL FORMS -->
+        <!-- Modals for Boil -->
+            <div id="modal_add_hop" class="modal">
+                <div class="modal-content">
+                    <%= render partial: 'recipe_hops/add' %>
+                </div>
+            </div>
+            <div id="modal_create_hop" class="modal">
+                <div class="modal-content">
+                    <h5>CREATE CUSTOM HOP</h5>
+                    <p>Sorry, this isn't working yet. Click on the "Hops" link in the nav bar and create a new hop there, then you can come back here and add it.</p>
+                </div>
+            </div>
+        <!-- Modals for Boil -->
 
         <div id="fermentation" class="divider"></div>
 
-        <%= render partial: 'fermentation_table', locals: {  } %>
-
+        <table class="fermentation-forms forms-div">
+            <tr class="brown lighten-3">
+                <td colspan="7"><h5>Fermentation & Yeast</h5></td>
+            </tr>
+            <div>
+            <div class="included-hops nested-fields">
+                <%= f.semantic_fields_for :recipe_yeasts do |yeast| %>
+                    <tr class="hop-row">    
+                        <td colspan="3"><%= yeast.text_field :name %></td>
+                        <td><%= yeast.text_field :lab %></td>
+                        <td>Attenuation %: </td>
+                        <td><%= yeast.number_field :attenuation %></td>
+                        <td><%= link_to "X", recipe_recipe_yeast_path(recipe_id: @recipe.id, id: yeast.object.id), method: :delete %></td>
+                    </tr>
+                <% end %>
+            </div>
+            <tr>
+                <td colspan="5"><button data-target="modal_add_recipe_yeast" class="btn modal-trigger brown darken-3">Add yeast</button></td>
+                <td colspan="5" class="right-align"><button data-target="modal_create_recipe_yeast" class="btn modal-trigger brown darken-3">Create Custom</button></td>
+            </tr>
+            <tr>
+                <td colspan="6" class="center-align">At the current fermentation profile this brew will need ### Billion Cells</td>
+                <td><%= image_tag("icon-advanced.png", height: "15", alt: "Edit equipment")%></td>
+            </tr>
+        </table><!-- FERMENTATION FORMS -->
+        <!-- Modals for yeast -->    
+            <div id="modal_add_recipe_yeast" class="modal">
+                <div class="modal-content">
+                    <%= render partial: 'recipe_yeasts/add' %>
+                </div>
+            </div>
+            <div id="modal_create_recipe_yeast" class="modal">
+                <div class="modal-content">
+                    <h5>CREATE CUSTOM YEAST</h5>
+                    <p>Sorry, this isn't working yet. Click on the "Yeast" link in the nav bar and create a new yeast there, then you can come back here and add it.</p>
+                </div>
+            </div>
+        <!-- Modals for yeast -->
+        
         <div id="other" class="divider"></div>
-            <table>
-                <% @recipe.recipe_others.each do |other| %>
-                <tr>
-                    <td colspan="3">OTHER MASH INGREDIENT</td>
-                    <td>AMNT LBS^</td>
-                    <td colspan="2"></td>
-                    <td>LOCATION</td>
-                    <td></td>
-                    <td><a data-target="modal_edit_fermentable<%= recipe_fermentable.id %>" class="modal-trigger "><%= image_tag("icon-advanced.png", height: "15", alt: "Edit this fermentable")%></a></td>
-                        <div class="modal" id="modal_edit_fermentable<%= recipe_fermentable.id %>">
-                            <div class="modal-content">
-                                <h4>Edit Other Ingredient</h4>
-                                
-                            </div>
-                        </div>
-                    <td>X</td>
-                </tr>
+            
+            <table class="included-others forms-div">
+                <%= f.semantic_fields_for :recipe_others do |other| %>
+                    <tr class="other-row">
+                        <td><%= other.text_field :name %></td>
+                        <td><%= other.number_field :amount, step: 0.1 %></td>
+                        <td>Oz^</td>
+                        <td><%= other.number_field :time %></td>
+                        <td>Mins</td>
+                        <td colspan="2">
+                            <%= other.select(:location, other_locations) %>
+                        </td>
+                        <td><%= link_to "X", recipe_recipe_other_path(recipe_id: @recipe.id, id: other.object.id), method: :delete %></td>
+                    </tr>
                 <% end %>
                 <tr>
                     <td colspan="5"><button data-target="modal_add_other" class="btn modal-trigger yellow darken-3">Add Other</button></td>
-                    <td colspan="5" class="right-align"><button data-target="modal_create_other" class="btn modal-trigger yellow darken-3">Create Custom</button></td>
+                    <td colspan="4"><button data-target="modal_create_other" class="btn modal-trigger yellow darken-3">Create Custom</button></td>
                 </tr>
-            </table>
+            </table><!-- OTHER INGREDIENTS -->
             <!-- MODALS FOR OTHERS -->
                 <div id="modal_add_other" class="modal">
                     <div class="modal-content">
-                        ADD OTHER 
+                        <%= render partial: 'recipe_others/add' %>
                     </div>
                 </div>
                 <div id="modal_create_other" class="modal">
                     <div class="modal-content">
                         <h5>CREATE CUSTOM OTHER</h5>
-                        <p>Sorry, this isn't working yet. Click on the "Fermentables" link in the nav bar and create a new fermentable there, then you can come back here and add it.</p>
+                        <p>Sorry, this isn't working yet. Click on the "Other" link in the nav bar and create a new ingredient there, then you can come back here and add it.</p>
                     </div>
                 </div>
             <!-- MODALS FOR OTHERS -->
