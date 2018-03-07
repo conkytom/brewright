@@ -11,8 +11,11 @@ class Recipe < ApplicationRecord
     has_many :recipe_yeasts, dependent: :destroy
 
     accepts_nested_attributes_for   :recipe_fermentables, 
+                                    :recipe_hops, 
+                                    :recipe_yeasts,
+                                    :recipe_others,
                                     allow_destroy: true,
-                                    reject_if: proc { |att| att['description'].blank? }
+                                    :reject_if => :all_blank
 
 
     default_scope { order('name ASC') }

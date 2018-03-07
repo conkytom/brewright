@@ -1,16 +1,9 @@
 class RecipesController < ApplicationController
-  def show
-    @recipe = Recipe.find(params[:id])
-  end
-
   def new
     @recipe = Recipe.create
     if @recipe.save
       redirect_to edit_recipe_path(Recipe.maximum('id'))
     end
-  end
-
-  def create
   end
 
   def index
@@ -27,24 +20,18 @@ class RecipesController < ApplicationController
   def edit
     @recipe = Recipe.find(params[:id])
     @recipe_fermentables = RecipeFermentable.where(recipe_id: @recipe.id) 
-    
-    
-    
-    @recipe_others = RecipeOther.all
+    @recipe_hops = RecipeHop.where(recipe_id: @recipe.id) 
+    @recipe_yeasts = RecipeFermentable.where(recipe_id: @recipe.id)
+    @recipe_others = RecipeFermentable.where(recipe_id: @recipe.id)
     @fermentables = Fermentable.all
-    
     @recipe.save!
-    
-  
   end
 
   def update
     @recipe = Recipe.find(params[:id])
     @recipe_fermentables = RecipeFermentable.where(recipe_id: @recipe.id) 
-    #@recipe_fermentables.each.assign_attributes(recipe_fermentable_params) 
     @recipe.assign_attributes(recipe_params)
-    #@recipe_fermentables.save
-    @recipe.save
+    @recipe.save!
     if @recipe.save
       redirect_to recipes_path
     end
@@ -55,8 +42,6 @@ class RecipesController < ApplicationController
     @fermentable = Fermentable.find(params[:fermentable_id])
     recipe_fermentable = RecipeFermentable.create(@fermentable.attributes.except("id", "created_at", "updated_at"))
     recipe_fermentable.recipe = @recipe
-    
-
     puts recipe_fermentable.attributes
     puts recipe_fermentable.save
     puts recipe_fermentable.attributes
@@ -65,36 +50,6 @@ class RecipesController < ApplicationController
     end
 
   end
-
-  def add_copy
-    @fermentable = Fermentable.find(params[:id])
-    @recipe_fermentable = RecipeFermentable.new(@fermentable.attributes)
-    if @recipe_fermentable.save
-      redirect_to new_recipe_path
-    end
-    puts @fermentable
-    puts @recipe_fermentable
-  end
-
-  def create_custom_ferm
-    recipe = Recipe.find(params[:recipe_id])
-    recipe_fermentable = recipe.recipe_fermentables.create(recipe_fermentable_params)
-    
-    
-    if recipe_fermentable.save
-      redirect_to edit_recipe_path(recipe.id)
-    else
-      redirect_to hops_path
-    end
-
-  end
-
-  def customize_ferm
-    @recipe_fermentable = @recipe.RecipeFermentable.find(params[:id])
-    @recipe_fermentable.assign_attributes(recipe_fermentable_params)
-    @recipe_fermentable.save!
-    @recipe.save!
-  end  
   
   def recipe_params
     params.require(:recipe).permit(
@@ -148,25 +103,10 @@ class RecipesController < ApplicationController
       :equipment_evaporation_rate_unit,
       :equipment_wort_shrinkage,
       :comment,
-      recipe_fermentable_attributes: RecipeFermentable.attribute_names.map(&:to_sym).push(:_destroy)
+      recipe_fermentables_attributes: RecipeFermentable.attribute_names.map(&:to_sym).push(:_destroy),
+      recipe_hops_attributes:         RecipeHop.attribute_names.map(&:to_sym).push(:_destroy),
+      recipe_yeasts_attributes:       RecipeYeast.attribute_names.map(&:to_sym).push(:_destroy),
+      recipe_others_attributes:       RecipeOther.attribute_names.map(&:to_sym).push(:_destroy)
       )
-  end
-
-  def recipe_fermentable_params
-    params.require(:recipe_fermentable).permit(
-      :name, 
-      :color, 
-      :color_unit, 
-      :extract, 
-      :ferm_type, 
-      :origin, 
-      :maltster, 
-      :usage_rate, 
-      :comment, 
-      :amount, 
-      :amount_unit, 
-      :percent_malt_bill, 
-      :location, 
-      :recipe_id)
   end
 end

@@ -1,0 +1,21 @@
+<tr class="fermentable-row">
+    <%= f.inputs do %>
+        <td colspan="3"><%= f.text_field :name %></td>
+        <td class="fermentable-amount"><%= f.number_field :amount, step: 0.1 %></td>
+        <td>LBS^</td>
+        <td><%= f.number_field :color %></td>
+        <td>˚L</td>
+        <td><%= f.number_field :extract %></td>
+        <td>%Extract</td>
+        <td colspan="2">
+        <% if f.object.ferm_type != 'Sugar Adjunct' %>
+            <%= f.select(:location, grain_locations) %>
+        <% else %>
+            <%= f.select(:location, sugar_locations) %>
+        <% end %>
+        </td>
+        <td> <%= f.object.percent_malt_bill %>%</td>
+        <td><%= link_to "X", recipe_recipe_fermentable_path(recipe_id: @recipe.id, id: f.object.id), method: :delete %></td>
+    <% end %>
+</tr>
+
