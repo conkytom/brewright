@@ -79,16 +79,6 @@ class RecipesController < ApplicationController
     end
   end
 
-  def add_copy_thing
-    @recipe = Recipe.find(params[:recipe_id])
-    @thing = Thing.find(params[:thing_id])
-    recipe_thing = RecipeThing.create(@thing.attributes.except("id", "created_at", "updated_at"))
-    recipe_thing.recipe = @recipe
-    if recipe_fermentable.save
-      redirect_to edit_recipe_path(@recipe.id)
-    end
-  end
-
   def recipe_params
     params.require(:recipe).permit(
       :name, 

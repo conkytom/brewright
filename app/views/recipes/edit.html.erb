@@ -1,5 +1,4 @@
 <%= semantic_form_for [@recipe] do |f| %>
-<% f.inputs do %>
     <div id="fixed-menu" class="recipe-snapshot amber darken-3">
         <div id="mash" class="about-brew valign-wrapper amber darken-3 row">
             <div class="brew-name input-field col s3">
@@ -306,13 +305,10 @@
         
         <div class="comment-form forms-div">
             <h5>Comments</h5>
+            <%= f.text_area :comment, :rows => 8 %>
         </div><!-- COMMENT FORM -->
         <div class="form-actions">
-            <%= f.button :submit, class: 'btn' %>
-            
-
+            <%= f.submit 'Save Recipe', class: 'btn' %>
         </div>
-            
     </div><!-- RECIPE FORMS -->
-    <% end %>
 <% end %>

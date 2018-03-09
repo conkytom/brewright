@@ -72,6 +72,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #For handling multiple models in a single form
 gem 'formtastic', '~> 3.0'
-gem 'cocoon'
+gem 'cocoon' #Not really used
+
+#To create seed file from already created database
+gem 'seed_dump'
 
 
