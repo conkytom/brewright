@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", function(){
+$(document).ready(function(){
   var make_fixed = function(name, number){
       var header = $("#" + name);
       $(window).scroll(function() {    
